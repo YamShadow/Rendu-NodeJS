@@ -1,0 +1,29 @@
+{
+  "name": "rendu-nodejs",
+  "version": "1.0.0",
+  "description": "Rendu-NodeJS",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YamShadow/Rendu-NodeJS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YamShadow/Rendu-NodeJS/issues"
+  },
+  "homepage": "https://github.com/YamShadow/Rendu-NodeJS#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.6",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.3.0",
+    "mongoose": "^5.3.10",
+    "path": "^0.12.7"
+  }
+}
