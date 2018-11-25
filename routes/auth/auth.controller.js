@@ -23,7 +23,6 @@ const register = body => {
         bcrypt
           .hash(body.password, 10)
           .then(hashedPassword => {
-            console.log(hashedPassword);
             // Replace clear password
             body.password = hashedPassword;
 

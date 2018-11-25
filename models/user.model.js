@@ -21,7 +21,6 @@ Method
 userSchema.methods.generateJwt = function generateJwt() {
   // set expiration
   const expiry = new Date();
-  console.log(expiry);
   expiry.setDate(expiry.getDate() + 59);
 
   // JWT creation

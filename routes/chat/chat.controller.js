@@ -47,9 +47,6 @@ const deleteMessage = body => {
   return new Promise((resolve, reject) => {
     const user = new UserModel().getJwt(body.token);
 
-    console.log(user);
-    console.log(body);
-
     ChatModel.deleteOne(
       { _id: body.id, idUser: user._id },
       (error, deleteMessage) => {
