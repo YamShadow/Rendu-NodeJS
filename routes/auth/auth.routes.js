@@ -19,7 +19,14 @@ class AuthRouterClass {
   routes() {
     // HATEOAS
     authRouter.get("/", (req, res) => {
-      res.json("HATEOAS for auth");
+      const routes = {
+        Route: {
+          "/": "Liste des routes disponibles",
+          register: "Inscription de l'utilisateur",
+          login: "Connexion de l'utilisateur"
+        }
+      };
+      res.json(routes);
     });
 
     // Register

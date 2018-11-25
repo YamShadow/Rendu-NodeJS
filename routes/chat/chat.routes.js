@@ -19,7 +19,13 @@ class ChatRouterClass {
   routes() {
     // HATEOAS
     chatRouter.get("/", (req, res) => {
-      res.json("HATEOAS for chat");
+      const routes = {
+        Route: {
+          "/": "Liste des routes disponibles",
+          "/message": "CRD des messages"
+        }
+      };
+      res.json(routes);
     });
 
     // Messages
