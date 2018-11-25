@@ -9,6 +9,7 @@ Model definition
 */
 const chatSchema = new Schema({
   message: String,
+  date: Date,
   idUser: String
 });
 

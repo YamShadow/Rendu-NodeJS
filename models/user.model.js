@@ -21,6 +21,7 @@ Method
 userSchema.methods.generateJwt = function generateJwt() {
   // set expiration
   const expiry = new Date();
+  console.log(expiry);
   expiry.setDate(expiry.getDate() + 59);
 
   // JWT creation
@@ -36,8 +37,13 @@ userSchema.methods.generateJwt = function generateJwt() {
   );
 };
 
-userSchema.methods.checkJwt = function checkJwt(token) {
-  print(token);
+userSchema.methods.getJwt = function getJwt(token) {
+  const decryptToken = jwt.verify(token, process.env.JWT_SECRET);
+  return {
+    _id: decryptToken._id,
+    email: decryptToken.email,
+    password: decryptToken.password
+  };
 };
 
 /*

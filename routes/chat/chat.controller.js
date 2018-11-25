@@ -3,7 +3,6 @@ Import
 */
 const UserModel = require("../../models/user.model");
 const ChatModel = require("../../models/chat.model");
-const bcrypt = require("bcryptjs");
 
 /*
 Functions
@@ -24,23 +23,48 @@ const getMessage = body => {
 
 const postMessage = body => {
   return new Promise((resolve, reject) => {
-    UserModel.findOne({ email: body.email }, (error, user) => {
-      if (error) reject(error);
-      else if (!user) reject("User not found");
-      else {
-        // Check password
-        const validPassword = bcrypt.compareSync(body.password, user.password);
+    const user = new UserModel().getJwt(body.token);
 
-        if (!validPassword) reject("Password not valid");
-        else
-          resolve({
-            user: user,
-            token: user.generateJwt()
-          });
+    const data = {
+      message: body.message,
+      date: new Date(),
+      idUser: user._id
+    };
+
+    ChatModel.create(data, (error, newMessage) => {
+      if (error) {
+        // Mongo error
+        return reject(error);
+      } else {
+        // Message saved
+        return resolve(newMessage);
       }
     });
   });
 };
+
+const deleteMessage = body => {
+  return new Promise((resolve, reject) => {
+    const user = new UserModel().getJwt(body.token);
+
+    console.log(user);
+    console.log(body);
+
+    ChatModel.deleteOne(
+      { _id: body.id, idUser: user._id },
+      (error, deleteMessage) => {
+        if (error) {
+          // Mongo error
+          return reject(error);
+        } else {
+          // Message deleted
+          return resolve(deleteMessage);
+        }
+      }
+    );
+  });
+};
+
 //
 
 /*
@@ -48,5 +72,6 @@ Export
 */
 module.exports = {
   getMessage,
-  postMessage
+  postMessage,
+  deleteMessage
 };

@@ -3,7 +3,7 @@ Imports
 */
 const express = require("express");
 const chatRouter = express.Router({ mergeParams: true });
-const { getMessage, postMessage, login } = require("./chat.controller");
+const { getMessage, postMessage, deleteMessage } = require("./chat.controller");
 const { checkFields } = require("../../services/request.checker");
 const {
   sendBodyError,
@@ -27,9 +27,11 @@ class ChatRouterClass {
       // Use controller function
       getMessage(req.body)
         .then(apiResponse =>
-          sendApiSuccessResponse(res, "Messages ok", apiResponse)
+          sendApiSuccessResponse(res, "Messages collected", apiResponse)
         )
-        .catch(apiErr => sendApiErrorResponse(res, "Messages not ok", apiErr));
+        .catch(apiErr =>
+          sendApiErrorResponse(res, "Messages not collected", apiErr)
+        );
     });
 
     chatRouter.post("/message", (req, res) => {

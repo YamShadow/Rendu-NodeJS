@@ -7,13 +7,6 @@ const { Router } = require("express");
 // Inner
 const AuthRouterClass = require("./auth/auth.routes");
 const ChatRouterClass = require("./chat/chat.routes");
-const { checkFields } = require("../services/request.checker");
-const {
-  sendBodyError,
-  sendFieldsError,
-  sendApiSuccessResponse,
-  sendApiErrorResponse
-} = require("../services/server.response");
 
 /*
 Define routers
